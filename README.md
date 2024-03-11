@@ -5,7 +5,7 @@ This package computes the free energy and the diffusion matrix for the LJ7 in 2D
 
 The total potential energy of LJ7 system consists of the Lennard-Jones pair potential LJ7(x) and the restraining potential that turns on as an LJ particle deviates from the center of mass by a distance greater than 2:
 
-U(x) = LJ(x) + RestrainingPotential(x)
+$$U(x) = LJ(x) + RestrainingPotential(x)$$
 
 The procedure consists of four steps. 
 
