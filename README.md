@@ -3,9 +3,9 @@ This package computes the free energy and the diffusion matrix for the LJ7 in 2D
 
 ## Computation the free energy for LJ7 in 2D in the (mu2,mu3) collective variables
 
-The total potential energy of LJ7 system consists of the Lennard-Jones pair potential LJ7(x) and the restraining potential that turns on as an LJ particle deviates from the center of mass by a distance greater than 2:
+The total potential energy of LJ7 system consists of the Lennard-Jones pair potential $LJ(x)$ and the restraining potential $R$ that turns on as an LJ particle deviates from the center of mass by a distance greater than 2:
 
-$$U(x) = LJ(x) + RestrainingPotential(x)$$
+$$U(x) = LJ(x) + R(x)$$
 
 The procedure consists of four steps. 
 
@@ -18,9 +18,11 @@ The sum of the deposited Gaussian bumps properly rescaled approximated the negat
 **Step 3.** Then we run a long trajectory in the biased potential and bin each point in the process. The bin centers are located at the grid points of the bicubic interpolant.
 
 **Step 4.** Finally, we estimate the free energy as follows.
-The number of the binned points N(i,j) in bin (i,j) is proportional to exp(-beta(F(i,j) + B(i,j)) where F is the desired free energy and B is the biasing potential.
+The number of the binned points $N(i,j)$ in bin $(i,j)$ is proportional to $exp(-beta(F(i,j) + B(i,j))$ where F is the desired free energy and $B$ is the biasing potential.
 Hence, we evaluate the free energy as
-F(i,j) = -log(N(i,j))/beta - B(i,j).
+
+$$F(i,j) = -log(N(i,j))/beta - B(i,j).$$
+
 We choose the free constant of the free energy so that its minimal value is zero.
 We also build a bicubic interplant of the computed free energy. It allows us to evaluate it and its gradient on at any query point. Extrapolation is allowed.
 
@@ -119,16 +121,21 @@ These files are N2-by-N1 arrays of entries M11, M12, and M22 of the diffusion ma
 These files are N1*N2-by-16 arrays of the bicubic matrix coefficients that allow one to evaluate M at any point in the CV space.
 
 The code computes the entries M11, M12, and M22 at all grid points where the initial configurations are available.
-At each cell (i,j), a trajectory of NSTEPS (line 25) steps in the potential biased with the spring force is run. The resulting potential is 
-U(x) = LJ(x) + RestrainingPotential(x) + 
-0.5*BKAPPA((CV1(x)-CV1[i])^2 + (CV2(x)-CV2[j])^2).
+At each cell $(i,j)$, a trajectory of NSTEPS (line 25) steps in the potential biased with the spring force is run. The resulting potential is 
+
+$$U(x) = LJ(x) + R(x) + 0.5*BKAPPA((CV1(x)-CV1[i])^2 + (CV2(x)-CV2[j])^2).$$
+
 The constant BKAPPA is set to 500.0, the time step is 1.0e-5.
 Then the entries of M are obtained as
-M11 = (1/Nsteps)\sum_{k=1}^{Nsteps} \sum_{j=1}^{dim}(dCV1/dx_j)^2
-M12 = (1/Nsteps)\sum_{k=1}^{Nsteps} \sum_{j=1}^{dim}(dCV1/dx_j)(dCV2/dx_j)
-M22 = (1/Nsteps)\sum_{k=1}^{Nsteps} \sum_{j=1}^{dim}(dCV2/dx_j)^2
+
+$$M11 = (1/Nsteps)\sum_{k=1}^{Nsteps} \sum_{j=1}^{dim}(dCV1/dx_j)^2,$$
+
+$$M12 = (1/Nsteps)\sum_{k=1}^{Nsteps} \sum_{j=1}^{dim}(dCV1/dx_j)(dCV2/dx_j),$$
+
+$$M22 = (1/Nsteps)\sum_{k=1}^{Nsteps} \sum_{j=1}^{dim}(dCV2/dx_j)^2.$$
+
 The diffusion matrix is found at all other grid points via nearest neighbor interpolation.
-The array of bicubic matrices are computed for M11, M12, and M22 to enable their evaluation everywhere in the CV space.
+The array of bicubic matrices are computed for $M11$, $M12$, and $M22$ to enable their evaluation everywhere in the CV space.
 If NSTEPS = 1e4, CPU time is ~152 seconds, if NSTEPS = 1e6, CPU time is ~4.5 hours (~15000 seconds).
 
 
