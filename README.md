@@ -9,7 +9,7 @@ U(x) = LJ(x) + RestrainingPotential(x)
 
 The procedure consists of four steps. 
 
-**Step 1.** First, we deposit Gaussian bumps with decaying heights by running well-tempered metadynamics as described in Barducci, Bucci, and Parrinello (2008, https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.100.020603,
+**Step 1.** First, we deposit Gaussian bumps with decaying heights by running well-tempered metadynamics as described in [Barducci, Bucci, and Parrinello (2008)] (https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.100.020603,
 DOI: 10.1103/PhysRevLett.100.020603).
 The sum of the deposited Gaussian bumps properly rescaled approximated the negative of the free energy. However, this approach for free energy estimation is unreliable as  suboptimal choices of the parameters gamma (the artificial temperature), the height and covariance function of the Gaussian bumps, and the total number of Gaussian bumps result in either wrong and/or noisy free energy estimate. Therefore, we use the biased potential for higher efficiency of the binning approach for free energy evaluation.
  
