@@ -7,7 +7,7 @@ The total potential energy of LJ7 system described by the vector of coordinates 
 
 $$U(x) = LJ(x) + R(x)$$
 
-further details can be found at
+Further details on LJ7 setup and $(\mu_2,\mu_3)$ can be found in
 [Evans, Cameron, Tiwary (ACHA 2023)](https://www.sciencedirect.com/science/article/pii/S1063520323000015) or [arXiv:2108.08979](https://arxiv.org/abs/2108.08979).
 
 The procedure consists of four steps. 
