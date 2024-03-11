@@ -1,9 +1,9 @@
 # LJ7 in 2D: free energy and diffusion matrix
 This package computes the free energy and the diffusion matrix for the LJ7 in 2D in the collective variables (mu2,mu3), the second and the third central moments of the coordination numbers.
-The provided directory Data contains all data files necessary for visualizing the free energy and the diffusion matrix at BETA = 5 and BETA = 10. Furthermore, the provided data allow you to evaluate the free energy and the diffusion matrix as well as their gradients at any query point in the collective variable space $(\mu_2,\mu_3)$
-## Computation the free energy for LJ7 in 2D in the $(\mu_2,\mu_3)$ collective variables
+The provided directory Data contains all data files necessary for visualizing the free energy and the diffusion matrix at BETA = 5 and BETA = 10. Furthermore, the provided data allow you to evaluate the free energy and the diffusion matrix as well as their gradients at any query point in the collective variable space $(\mu_2,\mu_3)$.
+### Computation the free energy for LJ7 in 2D in the $(\mu_2,\mu_3)$ collective variables.
 
-The total potential energy of LJ7 system consists of the Lennard-Jones pair potential $LJ(x)$ and the restraining potential $R$ that turns on as an LJ particle deviates from the center of mass by a distance greater than 2:
+The total potential energy of LJ7 system described by the vector of coordinates $x\in \mathbb{R}^14$ consists of the Lennard-Jones pair potential $LJ(x)$ and the restraining potential $R$ that turns on as an LJ particle deviates from the center of mass by a distance greater than 2:
 
 $$U(x) = LJ(x) + R(x)$$
 
