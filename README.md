@@ -128,12 +128,14 @@ Compile command:
 	gcc LJ7in2D_prepare_configurations.c -lm -O3
 
 > Input directory: GBumpsData
-> 
-> Input file is the data file with the WT Metadynamics deposited Gaussian bump data: 
->	GBumpsData/GaussianBumps_beta5.txt
->
-> Output file: 
-> LJ7bins_confs.txt — $N_1\cdot N_2$-by-14 array of initial configurations at the grid cells.
+
+The input file is the data file with the WT Metadynamics deposited Gaussian bump data:
+
+> GBumpsData/GaussianBumps_beta5.txt
+
+Output file is an $N_1\cdot N_2$-by-14 array of initial configurations at the grid cells:
+
+> LJ7bins_confs.txt 
 	
 The code computes the bicubic interplant, runs a trajectory of 1e7 steps in the biased potential, and saves one representative configuration at each cell.
 
