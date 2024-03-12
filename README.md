@@ -27,7 +27,7 @@ The sum of the deposited Gaussian bumps properly rescaled approximated the negat
 The number of the binned points $N(i,j)$ in bin $(i,j)$ is proportional to $\exp(-\beta(F(i,j) + B(i,j))$ where F is the desired free energy and $B$ is the biasing potential.
 Hence, we evaluate the free energy as
 
-$$F(i,j) = -\log(N(i,j))\over/beta - B(i,j).$$
+$$F(i,j) = -{\log(N(i,j))\over \beta} - B(i,j).$$
 
 We choose the free constant of the free energy so that its minimal value is zero.
 We also build a bicubic interplant of the computed free energy. It allows us to evaluate it and its gradient on at any query point. Extrapolation is allowed.
