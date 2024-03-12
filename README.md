@@ -1,6 +1,6 @@
 # LJ7 in 2D: free energy and diffusion matrix
-This package computes the free energy and the diffusion matrix for the LJ7 in 2D in the collective variables (mu2,mu3), the second and the third central moments of the coordination numbers.
-The provided directory Data contains all data files necessary for visualizing the free energy and the diffusion matrix at BETA = 5 and BETA = 10. Furthermore, the provided data allow you to evaluate the free energy and the diffusion matrix as well as their gradients at any query point in the collective variable space $(\mu_2,\mu_3)$.
+This package computes the free energy and the diffusion matrix for the LJ7 in 2D in the collective variables $(\mu_2,\mu_3)$, the second and the third central moments of the coordination numbers.
+The provided directory Data contains all data files necessary for visualizing the free energy and the diffusion matrix at $\beta = 5$ and $\beta = 10$. Furthermore, the provided data allow you to evaluate the free energy and the diffusion matrix as well as their gradients at any query point in the collective variable space $(\mu_2,\mu_3)$.
 
 Therefore, if you need the free energy and the diffusion matrix at $\beta = 5$ or $\beta = 10$, it suffices to download the directories Data and Figures and the ipynb file.
 
@@ -13,11 +13,17 @@ $$U(x) = LJ(x) + R(x)$$
 Further details on LJ7 setup and $(\mu_2,\mu_3)$ can be found in
 [Evans, Cameron, Tiwary (ACHA 2023)](https://www.sciencedirect.com/science/article/pii/S1063520323000015) or [arXiv:2108.08979](https://arxiv.org/abs/2108.08979).
 
-The procedure consists of four steps. 
+The overdamped Langevin dynamics 
+
+$$dX_t =  - \nabla U(X_t)dt +\sqrt{2\beta^{-1}}dW_t$$
+
+governs the system. The MALA time integrator [Roberts and Tweedy, 1996](https://en.wikipedia.org/wiki/Metropolis-adjusted_Langevin_algorithm) is used.
+
+The procedure of computing the free energy consists of four steps. 
 
 **Step 1.** First, we deposit Gaussian bumps with decaying heights by running well-tempered metadynamics as described in [Barducci, Bucci, and Parrinello (2008)] (https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.100.020603,
 DOI: 10.1103/PhysRevLett.100.020603).
-The sum of the deposited Gaussian bumps properly rescaled approximated the negative of the free energy. However, this approach for free energy estimation is unreliable as  suboptimal choices of the parameters gamma (the artificial temperature), the height and covariance function of the Gaussian bumps, and the total number of Gaussian bumps result in either wrong and/or noisy free energy estimate. Therefore, we use the biased potential for higher efficiency of the binning approach for free energy evaluation.
+The sum of the deposited Gaussian bumps properly rescaled approximated the negative of the free energy. However, this approach for free energy estimation is unreliable as  suboptimal choices of the parameters gamma (the artificial temperature), the height and covariance function of the Gaussian bumps, and the total number of Gaussian bumps result in either wrong and/or noisy free energy estimate. Therefore, we use the biased potential for higher efficiency of the binning approach for free energy evaluation. 
  
 **Step 2.** The evaluation of the sum of Gaussian bumps and its gradient is expensive. Therefore, we approximate biasing potential and its gradient via building a bicubic interplant as described in the Wiki article “Bicubic Interpolation”: https://en.wikipedia.org/wiki/Bicubic_interpolation.
 
