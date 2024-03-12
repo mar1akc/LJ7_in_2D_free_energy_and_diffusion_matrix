@@ -4,9 +4,9 @@ The provided directory Data contains all data files necessary for visualizing th
 
 Therefore, if you need the free energy and the diffusion matrix at $\beta = 5$ or $\beta = 10$, it suffices to download the directories Data and Figures and the ipynb file.
 
-### Computation the free energy for LJ7 in 2D in the $(\mu_2,\mu_3)$ collective variables.
+### The Lennard-Jones-7 (LJ7) system
 
-The total potential energy of LJ7 system described by the vector of coordinates $x\in \mathbb{R}^{14}$ consists of the Lennard-Jones pair potential $LJ(x)$ and the restraining potential $R$ that turns on as an LJ particle deviates from the center of mass by a distance greater than 2:
+Imagine seven particles of diameter in 2D interacting according to Lennard-Jones pair potential. Evaporation of the particles is enforced via the restraining potential that starts acting if an LJ particle deviates from the center of mass by a distance greater than 2.  The total potential energy of LJ7 system described by the vector of coordinates $x\in \mathbb{R}^{14}$ consists of the Lennard-Jones pair potential $LJ(x)$ and the restraining potential $R$:
 
 $$U(x) = LJ(x) + R(x)$$
 
@@ -18,6 +18,8 @@ The overdamped Langevin dynamics
 $$dX_t =  - \nabla U(X_t)dt +\sqrt{2\beta^{-1}}dW_t$$
 
 governs the system. The MALA time integrator [Roberts and Tweedy, 1996](https://en.wikipedia.org/wiki/Metropolis-adjusted_Langevin_algorithm) is used.
+
+### Computation the free energy for LJ7 in 2D in the $(\mu_2,\mu_3)$ collective variables.
 
 The procedure of computing the free energy consists of four steps. 
 
@@ -38,7 +40,7 @@ $$F(i,j) = -{\log(N(i,j))\over \beta} - B(i,j).$$
 We choose the free constant of the free energy so that its minimal value is zero.
 We also build a bicubic interplant of the computed free energy. It allows us to evaluate it and its gradient on at any query point. Extrapolation is allowed.
 
-## A guide for running codes
+### A guide for running codes
 To run the C codes, open the Terminal and change the directory to the working directory where you copied the codes. Create GBumpsData and Data directories in your working directory or copy the provided directories and the data files in them into your working directory.
 To run each C file, copy and paste the compile command from the description below or from the top section of the code file and press Return to compile. Then, if no errors occurred, type ./a.out to run.
 
@@ -46,7 +48,7 @@ To run each C file, copy and paste the compile command from the description belo
 Run the code LJ7in2D_WTMetad_mu2mu3.c.
 Compile command: 
 
-gcc LJ7in2D_WTMetad_mu2mu3.c -lm -O3
+> gcc LJ7in2D_WTMetad_mu2mu3.c -lm -O3
 
 The parameters are assigned as #define directives at the top of the code.
 This run takes several hours.
@@ -55,7 +57,7 @@ This code will output the file with the heights and positions of the Gaussian bu
 You do not need to do this step if a suitable file with Gaussian bumps already exists. If you need a different beta value, you do not need to rerun this code as the biasing potential does not need to be perfect.
 
 The parameters for the well-tempered metadynamics are:
-BETA = 5.0
+BETA = 5.0 // the inverse temperature in the overdamped Langevin dynamics
 GAMMA = 1.0 // the decay parameter for the height of the bumps
 SIGMA = 0.02 // the standard deviation of the Gaussian bump function
 HEIGHT = 0.01 // the height of the Gaussian bump
@@ -64,24 +66,23 @@ NSTEPS_BETWEEN_DEPOSITS 500 // the number of steps between depositions of Gaussi
 NBUMPS_MAX 50000 // the total number of Gaussian bumps
 KAPPA = 100.0 // the spring constant for the restraining potential
 
-**Remark.** Note that even if you are planning to compute the free energy and the diffusion matrix at a different value of BETA, it still makes sense to tun well-tempered metadynamics at BETA = 5.0 because the bumps are used only for biasing the trajectory to be binned and then unbiased.
+**Remark.** Note that even if you are planning to compute the free energy and the diffusion matrix at a different value of $\beta$, it still makes sense to tun well-tempered metadynamics at $\beta = 5$ because the bumps are used only for biasing the trajectory to be binned and then unbiased.
 
-Output directory: GBumpsData
-Output file: GbumpsData/GaussianBumps_beta5.txt
+> Output directory: GBumpsData
+> Output file: GbumpsData/GaussianBumps_beta5.txt
 
 
 **Steps 2, 3, 4.** 
 Run the code LJ7in2D_bicubicFE_binning.c.
 Compile command: 
 
-gcc LJ7in2D_bicubicFE_binning.c -lm -O3
+> gcc LJ7in2D_bicubicFE_binning.c -lm -O3
 
 Input directory: GBumpsData
 This code reads the input file 
 
 char fpot_name[] = "GBumpsData/GaussianBumps_beta5.txt";
 
- where beta is BETA assigned in line 17.
 The trajectory consists of 1e9 time steps. The run takes approximately 40 minutes.
 This code outputs several files.
 
