@@ -99,8 +99,9 @@ the computed free energy,
 
 	sprintf(fname,"Data/LJ7free_energy_beta%.0f.txt",BETA);
 
-and set of bicubic matrices for bicubic interpolation of the free energy. 
-		sprintf(fname,"Data/LJ7free_energy_bicubic_matrix_beta%.0f.txt",BETA);
+and set of bicubic matrices for bicubic interpolation of the free energy
+
+	sprintf(fname,"Data/LJ7free_energy_bicubic_matrix_beta%.0f.txt",BETA).
 
 
 ## Computation of the diffusion matrix for LJ7 in the (mu2,mu3) collective variables
