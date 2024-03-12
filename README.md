@@ -91,10 +91,10 @@ Compile command:
 	gcc LJ7in2D_bicubicFE_binning.c -lm -O3
 
 > Input directory: GBumpsData
->
-> This code reads the input file 
 
-	char fpot_name[] = "GBumpsData/GaussianBumps_beta5.txt";
+This code reads the input file 
+
+> char fpot_name[] = "GBumpsData/GaussianBumps_beta5.txt";
 
 The trajectory consists of 1e9 time steps. The run takes approximately 40 minutes.
 This code outputs several files.
